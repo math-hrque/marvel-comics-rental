@@ -1,0 +1,5 @@
+CREATE TABLE marvelhq (
+    hq_id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    hq_titulo VARCHAR(150),
+    hq_imagem VARCHAR(250)
+);
