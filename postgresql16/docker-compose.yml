@@ -1,0 +1,21 @@
+services:
+  database:
+    image: postgres:16-alpine
+    container_name: marvel-app-db
+    shm_size: 256mb
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: marvel-app
+    ports:
+      - 65432:5432
+    volumes:
+      - marvel-app-db:/var/lib/postgresql/data
+
+volumes:
+  marvel-app-db:
+
+networks:
+  default:
+    name: marvel-app
+    external: true
