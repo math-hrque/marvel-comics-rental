@@ -45,20 +45,16 @@ const Card = (props: { image: string; title: string; devolucao: string, id:numbe
 
 
   function formatDate(dateString: string): string {
-    // Converte a string em um objeto Date
     let date = new Date(dateString);
   
-    // Verifica se a data é válida
     if (isNaN(date.getTime())) {
       return 'Data inválida';
     }
   
-    // Obtém o dia, o mês e o ano da data fornecida
     let day: number | string = date.getDate();
-    let month: number | string = date.getMonth() + 1; // Os meses em JavaScript são de 0 a 11
+    let month: number | string = date.getMonth() + 1;
     let year: number = date.getFullYear();
   
-    // Adiciona um zero à esquerda se o dia ou o mês tiverem apenas um dígito
     if (day < 10) {
       day = '0' + day;
     }
@@ -66,7 +62,6 @@ const Card = (props: { image: string; title: string; devolucao: string, id:numbe
       month = '0' + month;
     }
   
-    // Retorna a data no formato dd/mm/yyyy
     return `${day}/${month}/${year}`;
   }
   

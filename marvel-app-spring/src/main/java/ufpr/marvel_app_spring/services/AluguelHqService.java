@@ -34,4 +34,5 @@ public class AluguelHqService {
         }
         return null;
     }
+
 }

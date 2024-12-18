@@ -19,6 +19,7 @@ import ufpr.marvel_app_spring.repositories.UsuarioRepository;
 public class LoginController {
 
 	Logger logger = LoggerFactory.getLogger(LoginController.class);
+	
 	@Autowired
 	private UsuarioRepository repository;
 
@@ -31,4 +32,5 @@ public class LoginController {
 			return ResponseEntity.badRequest().build(); 
 		}
     }
+
 }

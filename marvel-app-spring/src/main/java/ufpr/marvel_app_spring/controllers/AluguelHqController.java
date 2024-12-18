@@ -34,12 +34,16 @@ public class AluguelHqController {
 	
 	@Autowired
 	private AluguelHqService aluguelHqService;	
+
 	@Autowired
 	private MarvelHqService marvelHqService;
+
 	@Autowired
 	private UsuarioRepository userRepository;
+
 	@Autowired
 	private AluguelHqComDetalhesViewRepository aluguelDtoRepository;
+
 	@Autowired
 	private AluguelHqRepository aluguelHqRepository;
 	
@@ -51,23 +55,16 @@ public class AluguelHqController {
 	@GetMapping("/list/{id}")
 	public ResponseEntity<?> getAllAlugueisUsuario(@PathVariable Long id) {
 		try {
-	        // Busca todos os usuários ativos
 	        List<AluguelHqComDetalhesDto> alugueis = aluguelDtoRepository.findByUsuarioId(id);
-
-	        // Verifica se a lista de usuários está vazia
 	        if (alugueis.isEmpty()) {
-	            // Retorna 204 No Content se não houver usuários ativos
 	            return ResponseEntity.noContent().build();
 	        } else {
-	            // Retorna 200 OK com a lista de usuários ativos
 	            return ResponseEntity.ok(alugueis);
 	        }
 	    } catch (Exception e) {
-	        // Em caso de erro, retorna 500 Internal Server Error com a mensagem de erro
 	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ocorreu um erro ao buscar os usuários: " + e.getMessage());
 	    }	
 	}
-	
 	
 	@Operation(description = "Operação para persistir um aluguel de Hq.")
     @ApiResponses(value = {
@@ -96,7 +93,6 @@ public class AluguelHqController {
 			return ResponseEntity.noContent().build();
 			
 		} catch (Exception e) {
-			// TODO: handle exception
 			logger.error("Erro ao salvar AluguelHq: " + e.getMessage());
             return ResponseEntity.badRequest().build();
 		}
@@ -117,4 +113,5 @@ public class AluguelHqController {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
 	}
+
 }

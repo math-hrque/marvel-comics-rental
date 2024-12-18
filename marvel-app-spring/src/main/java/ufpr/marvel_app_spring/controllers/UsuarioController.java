@@ -29,6 +29,7 @@ import org.slf4j.LoggerFactory;
 public class UsuarioController {
 	
 	Logger logger = LoggerFactory.getLogger(UsuarioController.class);
+	
 	@Autowired
 	private UsuarioRepository repository;
 	
@@ -40,19 +41,14 @@ public class UsuarioController {
 	@GetMapping("/list")
 	public ResponseEntity<?> getAllUsers() {
 		try {
-	        // Busca todos os usuários ativos
 	        List<Usuario> usuarios = repository.findAllByActiveTrue();
 
-	        // Verifica se a lista de usuários está vazia
 	        if (usuarios.isEmpty()) {
-	            // Retorna 204 No Content se não houver usuários ativos
 	            return ResponseEntity.noContent().build();
 	        } else {
-	            // Retorna 200 OK com a lista de usuários ativos
 	            return ResponseEntity.ok(usuarios);
 	        }
 	    } catch (Exception e) {
-	        // Em caso de erro, retorna 500 Internal Server Error com a mensagem de erro
 	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
 	                             .body("Ocorreu um erro ao buscar os usuários: " + e.getMessage());
 	    }
@@ -87,8 +83,6 @@ public class UsuarioController {
                     .buildAndExpand(savedUsuario.getId()).toUri();
             return ResponseEntity.created(location).body(savedUsuario);   
         } catch (Exception e) {
-            // Captura a exceção e trata o erro
-            // Exemplo:
             logger.error("Erro ao salvar usuário: " + e.getMessage());
             return ResponseEntity.badRequest().build();
         }	
@@ -105,19 +99,19 @@ public class UsuarioController {
 	@PutMapping()
 	@Transactional
 	public ResponseEntity<?> updateUser(@RequestBody @Valid RequestUpdateUsuarioDto data) {
-       		Optional<Usuario> optionalUser = repository.findById(data.id());
-    		if (optionalUser.isPresent()) {
-    			Usuario updateUsuario = optionalUser.get();
-    			updateUsuario.setNome(data.nome());
-    			updateUsuario.setEmail(data.email());
-    			updateUsuario.setSenha(data.senha());
-    			updateUsuario.setTelefone(data.telefone());
-    			updateUsuario.setFoto(data.foto());
-    			//updateUsuario.setActive(data.active());
-    			return ResponseEntity.ok(updateUsuario);
-    		}	else {
-    			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-    		}
+		Optional<Usuario> optionalUser = repository.findById(data.id());
+		if (optionalUser.isPresent()) {
+			Usuario updateUsuario = optionalUser.get();
+			updateUsuario.setNome(data.nome());
+			updateUsuario.setEmail(data.email());
+			updateUsuario.setSenha(data.senha());
+			updateUsuario.setTelefone(data.telefone());
+			updateUsuario.setFoto(data.foto());
+			//updateUsuario.setActive(data.active());
+			return ResponseEntity.ok(updateUsuario);
+		} else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		}
 	}
     
     @Operation(description = "Operação para deletar um usuário.")
@@ -129,7 +123,6 @@ public class UsuarioController {
 	@DeleteMapping("/{id}")
     @Transactional
 	public ResponseEntity<?> deleteUser(@PathVariable Long id) {
-		//repository.deleteById(id);
 		Optional<Usuario> optionalUser = repository.findById(id);
 		if (optionalUser.isPresent()) {
 			Usuario updateUsuario = optionalUser.get();
@@ -139,4 +132,5 @@ public class UsuarioController {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}	
 	}
+
 }

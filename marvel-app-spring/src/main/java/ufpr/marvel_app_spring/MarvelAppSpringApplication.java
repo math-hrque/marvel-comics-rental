@@ -8,4 +8,5 @@ public class MarvelAppSpringApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(MarvelAppSpringApplication.class, args);
 	}
+
 }

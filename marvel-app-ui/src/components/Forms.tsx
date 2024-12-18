@@ -162,7 +162,7 @@ container: {
   alignItems: 'center',
   justifyContent: 'space-between',
   width: '90%',
-  height: Dimensions.get('window').height * 0.5, // Ajusta a altura para 50% da altura da tela
+  height: Dimensions.get('window').height * 0.5,
   marginLeft: 20,
 
 },
